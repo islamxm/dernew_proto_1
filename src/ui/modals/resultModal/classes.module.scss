@@ -1,0 +1,43 @@
+.wrapper {
+  .indicator {
+    padding: 30px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .line {
+      height: 13px;
+      overflow: hidden;
+      border-radius: var(--b_radius);
+      background-color: #eaeaea;
+      width: 100%;
+
+      .el {
+        width: 0;
+        background-color: var(--accent);
+        transition: all 3s ease;
+        height: 100%;
+      }
+    }
+  }
+
+  .percent {
+    font-size: 50px;
+    line-height: 60px;
+    font-weight: 700;
+    color: var(--accent);
+    text-align: center;
+  }
+
+  .ball {
+    text-align: center;
+    font-size: 25px;
+    line-height: 30px;
+    font-weight: 500;
+  }
+
+  .action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

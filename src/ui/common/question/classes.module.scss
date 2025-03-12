@@ -1,0 +1,65 @@
+.wrapper {
+  padding: 5px 0;
+  letter-spacing: 0;
+  
+  .main {
+    position: relative;
+    cursor: pointer;
+
+    .content {
+      background-color: #fff;
+      border-radius: var(--b_radius);
+      padding: 10px;
+      border: 1px solid var(--accent);
+      transition: all .3s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      content: '';
+      background-color: var(--accent);
+      border-radius: var(--b_radius);
+      transition: all .3s ease;
+    }
+
+    &:hover {
+
+      .content {
+        transform: translate(-5px, -5px);
+      }
+
+      .label {
+        color: var(--accent);
+      }
+    }
+
+    .label {
+      transition: all .3s ease;
+    }
+  }
+}
+
+.wrapper.answered {
+  .main {
+    .content {
+      background-color: var(--accent);
+      .label {
+        color: #fff !important;
+      }
+    }
+
+    &:after {
+      background-color: var(--accent_dark);
+    }
+  }
+}
+
+.wrapper.correct {
+
+}

@@ -1,0 +1,37 @@
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+  font-family: 'Parkinsans' !important;
+  cursor: pointer;
+
+  .variant {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--b_radius);
+    color: var(--accent);
+    // background-color: var(--accent);
+    border: 1px solid var(--accent);
+    flex: 0 0 auto;
+    margin-right: 5px;
+    transition: all .3s ease;
+  }
+
+  .text {
+    letter-spacing: 0;
+    transition: all .3s ease;
+    padding-top: 7px;
+  }
+}
+
+.wrapper.active {
+  .variant {
+    background-color: var(--accent);
+    color: #fff;
+  }
+  .text {
+    color: var(--accent);
+  }
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "type": "soft",
+    "room": "galkynysh"
+  },
+  {
+    "id": 2,
+    "type": "soft",
+    "room": "galkynysh"
+  },
+  {
+    "id": 3,
+    "type": "soft",
+    "room": "galkynysh"
+  },
+  {
+    "id": 4,
+    "type": "soft",
+    "room": "galkynysh"
+  },
+  {
+    "id": 5,
+    "type": "soft",
+    "room": "galkynysh"
+  },
+  {
+    "id": 6,
+    "type": "hard",
+    "room": "kazarma"
+  },
+  {
+    "id": 7,
+    "type": "hard",
+    "room": "kazarma"
+  },
+  {
+    "id": 8,
+    "type": "hard",
+    "room": "kazarma"
+  }
+]
