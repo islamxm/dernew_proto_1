@@ -15,9 +15,28 @@ const useQuiz = (categoryId: number) => {
 
   //создать список из 20 вопросов на основе рандомного подбора в зависимости от выбранной категории
   const createQuestionList = (categoryId: number) => {
-    // на данный момент выводятся все вопросы в категории
-    const list = db_questions.filter(question => question.categoryId === categoryId)
-    setQuestionList(list)
+
+    // тут скорее всего придется получить из стора (а в стор мы помещаем из indexedDB)
+    const allQuestions = db_questions.filter(question => question.categoryId === categoryId)
+    // тут скорее всего придется получить из стора (а в стор мы помещаем из indexedDB)
+
+    const maxLength = allQuestions.length - 1
+    let list = Array.from({ length: maxLength - 0 + 1 }, (n, i) => 0 + i)
+    for (let i = list.length; --i > 0;) {
+      const j = Math.random() * (i + 1) | 0;
+      [list[i], list[j]] = [list[j], list[i]];
+    }
+    if(maxLength <= 50) {
+      setQuestionList(list.map((number) => {
+        console.log(number, allQuestions[number])
+        return allQuestions[number]
+      }))
+    } else {
+      list.length = 50
+      setQuestionList(list.map((number) => {
+        return allQuestions[number]
+      }))
+    }
   }
 
   //Выбрать вопрос
@@ -27,7 +46,7 @@ const useQuiz = (categoryId: number) => {
       selectedVariant: answeredQuestions.find(q => q.id === question.id)?.selectedVariant
     })
   }
-  
+
   // отменить вопрос
   const cancelQuestion = () => {
     setQuestionData(undefined)
@@ -35,10 +54,10 @@ const useQuiz = (categoryId: number) => {
 
   //сохранить выбранный вариант
   const answerQuestion = (data: QAnswer) => {
-    if(answeredQuestions.find(q => q.id === data.id)) {
+    if (answeredQuestions.find(q => q.id === data.id)) {
       setAnsweredQuestions(s => s.map(q => {
-        if(q.id === data.id) {
-          return ({...q, selectedVariant: data.selectedVariant})
+        if (q.id === data.id) {
+          return ({ ...q, selectedVariant: data.selectedVariant })
         } else {
           return q
         }
@@ -46,11 +65,10 @@ const useQuiz = (categoryId: number) => {
     } else {
       setAnsweredQuestions(s => [...s, data])
     }
-    // cancelQuestion()
-  } 
+  }
 
   //получить результат теста
-  const getResult = ():QuizResult => {
+  const getResult = (): QuizResult => {
     const total = questionList.length
     const checkedList = checkQuizResult()
     const correct = checkedList.filter(f => f.isCorrect).length
@@ -75,14 +93,14 @@ const useQuiz = (categoryId: number) => {
   const checkQuizResult = () => {
     return answeredQuestions.map(aq => {
       const source = questionList.find(f => f.id === aq.id)
-      if(aq.selectedVariant === source?.correctAnswer) {
-        return ({...aq, isCorrect: true})
+      if (aq.selectedVariant === source?.correctAnswer) {
+        return ({ ...aq, isCorrect: true })
       } else {
-        return ({...aq, isCorrect: false})
+        return ({ ...aq, isCorrect: false })
       }
     })
   }
-  
+
   // отменить тест (сбросить все сохраненные данные в стейтах)
   const cancelQuiz = (cb?: () => void) => {
     setCategoryData(undefined)
@@ -104,7 +122,7 @@ const useQuiz = (categoryId: number) => {
   //получить данные о выбранной категории в зависимости от id
   const initCategoryData = (categoryId: number) => {
     const category = categories.find(f => f.id === categoryId)
-    if(category) {
+    if (category) {
       setCategoryData({
         title: category.title,
         type: category.type,
@@ -114,7 +132,7 @@ const useQuiz = (categoryId: number) => {
   }
 
   //присвоить состояние вопросу 
-  const setStateOfQuestion = (questionId: number):QuestionState => {
+  const setStateOfQuestion = (questionId: number): QuestionState => {
     const question = questionList.find(q => q.id === questionId)
     const answerData = answeredQuestions.find(q => q.id === questionId)
     const isAnswered = answerData ? true : false
@@ -129,7 +147,7 @@ const useQuiz = (categoryId: number) => {
 
   //начать тест после того как все данные готовы
   useEffect(() => {
-    if(categoryId) {
+    if (categoryId) {
       initCategoryData(categoryId)
       createQuestionList(categoryId)
     }
@@ -137,7 +155,7 @@ const useQuiz = (categoryId: number) => {
 
   //проверить текущее состояние теста
   useEffect(() => {
-    if(questionList.length > 0 && questionList.length === answeredQuestions.length) {
+    if (questionList.length > 0 && questionList.length === answeredQuestions.length) {
       setQuizState('done')
     } else setQuizState('proccess')
   }, [answeredQuestions, questionList])
@@ -165,7 +183,7 @@ const useQuiz = (categoryId: number) => {
 
       initCategoryData
     }
-    
+
   }
 }
 

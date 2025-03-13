@@ -7,11 +7,12 @@ const CategoryBody = () => {
   return (
     <>
       {
-        quiz?.data.questionList.map(question => (
+        quiz?.data.questionList.map((question, index) => (
           <Question
             state={quiz?.actions.setStateOfQuestion(question.id)}
             onClick={quiz?.actions.openQuestion}
             question={question}
+            orderNumber={index + 1}
           />
         ))
       }
